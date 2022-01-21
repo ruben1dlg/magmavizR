@@ -5,8 +5,19 @@ Authors@R:
     person(given = "Ruben",
            family = "De la Garza",
            role = c("aut", "cre"),
-           email = "ruben1dlg@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "ruben1dlg@gmail.com")
+    person(given = "Irene",
+           family = "Yan",
+           role = c("aut", "cre"),
+           email = "ianirene0903@gmail.com")
+    person(given = "Mukund",
+           family = "Iyer",
+           role = c("aut", "cre"),
+           email = "mukund.s.iyer@gmail.com")
+    person(given = "Adbul Moid",
+           family = "Mohammed",
+           role = c("aut", "cre"),
+           email = "ibaad90@gmail.com")           
 Description: This is a plotting package that has a purpleorange color theme.
 License: MIT + file LICENSE
 Encoding: UTF-8
