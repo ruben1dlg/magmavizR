@@ -26,7 +26,6 @@
 #' @export
 #'
 #' @examples
-#' corrplot(df, print_corr = FALSE, shape = "square")
 #' >>> scatterplot(iris, sepalLength, sepalWidth, species,
 #'                 "Iris Sepal Length vs Sepal Width across Species",
 #'                 1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
