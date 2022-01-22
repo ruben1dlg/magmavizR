@@ -9,6 +9,6 @@
 #' @export
 #'
 #' @examples
-#' function(df, "Length", "Species", TRUE)
-corrplot <- function(df, x, y, facet = FALSE) {
+#' function(df, Length, Species, TRUE)
+boxplot <- function(df, x, y, facet = FALSE) {
 }
