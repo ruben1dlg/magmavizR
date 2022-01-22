@@ -1,13 +1,13 @@
-#' Create a correlation plot
+#' Generates a correlation plot for the numeric variables in a dataframe,
+#' and prints the correlation values.
 #'
-#' @param df A dataframe to use for the correlation plot.
+#' @param df The dataframe containing the data to be plotted.
 #' @param print_corr Whether or not to print the correlation values between variables
-#' @param shape Shape to use in the plot
 #'
 #' @return A ggplot object.
 #' @export
 #'
 #' @examples
-#' corrplot(df, print_corr = FALSE, shape = "square")
+#' corrplot(df, print_corr = FALSE)
 corrplot <- function(df, print_corr=FALSE, shape="circle") {
 }
