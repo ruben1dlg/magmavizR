@@ -14,15 +14,36 @@
 boxplot <- function(df, x, y, facet = FALSE){
 
 
-
+#check type of x
 if ( typeof(rlang::get_expr(vars({{ x }})[[1]])) !=
      typeof(as.list(quote(symbol))[[1]])){
     stop("x must be unquoted")
 }
 
+#check typr of y
 if ( typeof(rlang::get_expr(vars({{ y }})[[1]])) !=
          typeof(as.list(quote(symbol))[[1]])){
         stop("y must be unquoted")
+}
+
+#check if x exists in df
+if ( !(as.character(as.list(
+    rlang::get_expr(vars({{ x }})[[1]])
+    )))
+    %in%
+    colnames({{ df }})
+){
+    stop('Col name not found')
+}
+
+#check if y exists in df
+if ( !(as.character(as.list(
+        rlang::get_expr(vars({{ y }})[[1]])
+    )))
+    %in%
+    colnames({{ df }})
+){
+    stop('Col name not found')
 }
 
 
