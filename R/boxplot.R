@@ -10,5 +10,26 @@
 #'
 #' @examples
 #' function(df, Length, Species, TRUE)
-boxplot <- function(df, x, y, facet = FALSE) {
+#'
+boxplot <- function(df, x, y, facet = FALSE){
+
+library(viridis)
+
+plot <- ggplot(df) +
+            geom_boxplot(aes(
+                x={{ x }},
+                y={{ y }},
+                fill= {{ x }}),
+            ) + scale_fill_viridis(discrete=TRUE, option="magma")
+
+        if (facet == TRUE){
+            return(plot  +
+                facet_wrap(vars({{ x }}))
+            )
+        } else {
+            return(plot)
+        }
+return(plot)
 }
+
+
