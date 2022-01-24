@@ -20,10 +20,12 @@ plot <- boxplot(df,miles_per_gallon,origin,facet=TRUE)
 
 test_that("The check for input type for x is failing",{
     expect_error(boxplot(df,"miles_per_gallon",origin))
+
 })
 
 test_that("The check for input type for x is failing",{
     expect_error(boxplot(df,miles_per_gallon,"origin"))
+
 })
 
 #check input types
