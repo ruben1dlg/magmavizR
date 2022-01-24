@@ -13,6 +13,29 @@
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
+stopifnot(
+
+    typeof(rlang::get_expr(vars({{ x }})[[1]])) ==
+          typeof(as.list(quote(symbol))[[1]]),
+
+    typeof(rlang::get_expr(vars({{ y }})[[1]])) ==
+        typeof(as.list(quote(symbol))[[1]])
+
+    )
+
+test_that("x must be the unquoted column name",{
+        expect_equal(typeof(rlang::get_expr(vars({{ x }})[[1]])),
+                     typeof(as.list(quote(symbol))[[1]]))
+})
+
+test_that("x must be the unquoted column name",{
+    expect_equal(typeof(rlang::get_expr(vars({{ y }})[[1]])),
+                 typeof(as.list(quote(symbol))[[1]]))
+})
+
+
+
+
 library(viridis)
 
 plot <- ggplot(df) +
