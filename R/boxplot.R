@@ -13,27 +13,17 @@
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
-stopifnot(
-
-    typeof(rlang::get_expr(vars({{ x }})[[1]])) ==
-          typeof(as.list(quote(symbol))[[1]]),
-
-    typeof(rlang::get_expr(vars({{ y }})[[1]])) ==
-        typeof(as.list(quote(symbol))[[1]])
-
-    )
-
-test_that("x must be the unquoted column name",{
-        expect_equal(typeof(rlang::get_expr(vars({{ x }})[[1]])),
-                     typeof(as.list(quote(symbol))[[1]]))
-})
-
-test_that("x must be the unquoted column name",{
-    expect_equal(typeof(rlang::get_expr(vars({{ y }})[[1]])),
-                 typeof(as.list(quote(symbol))[[1]]))
-})
 
 
+if ( typeof(rlang::get_expr(vars({{ x }})[[1]])) !=
+     typeof(as.list(quote(symbol))[[1]])){
+    stop("x must be unquoted")
+}
+
+if ( typeof(rlang::get_expr(vars({{ y }})[[1]])) !=
+         typeof(as.list(quote(symbol))[[1]])){
+        stop("y must be unquoted")
+}
 
 
 library(viridis)
