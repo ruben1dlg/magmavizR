@@ -1,4 +1,5 @@
 library(magmavizR)
+library(dplyr)
 
 
 x <- c(18.0, 15.0, 18.0, 16.0, 17.0, 15.0, 14.0, 14.0, 14.0, 15.0)
@@ -13,7 +14,7 @@ y <- c("USA",
        "USA",
        "Europe")
 
-df <- tibble('miles_per_gallon' = x,
+df <- dplyr::tibble('miles_per_gallon' = x,
              'origin' = y)
 
 plot <- boxplot(df,miles_per_gallon,origin)
@@ -61,8 +62,8 @@ expect_true(rlang::get_expr(plot$layers[[1]]$mapping$y)
 })
 
 test_that('Facetting is occuring as expected', {
-expect_true('FacetWrap' %in% class(rlang::get_expr(plot$facet)))
-expect_true('FacetNull' %in% class(rlang::get_expr(plot_facet$facet)))
+expect_true('FacetWrap' %in% class(rlang::get_expr(plot_facet$facet)))
+expect_true('FacetNull' %in% class(rlang::get_expr(plot$facet)))
 })
 
 
