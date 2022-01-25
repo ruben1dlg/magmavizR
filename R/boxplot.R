@@ -6,6 +6,9 @@
 #' @param facet Determines whether separate graphs will be created for each category
 #'
 #' @return a ggplot object
+#'
+#'
+#'
 #' @export
 #'
 #' @examples
@@ -13,15 +16,20 @@
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
+library(viridis)
+library(stringr)
+library(rlang)
+library(ggplot2)
+
 ### input tests
 #check type of x
-if ( typeof(rlang::get_expr(vars({{ x }})[[1]])) !=
+if ( typeof(rlang::get_expr(ggplot2::vars({{ x }})[[1]])) !=
      typeof(as.list(quote(symbol))[[1]])){
     stop("x, the column name for x, must be unquoted")
 }
 
 #check type of y
-if ( typeof(rlang::get_expr(vars({{ y }})[[1]])) !=
+if ( typeof(rlang::get_expr(ggplot2::vars({{ y }})[[1]])) !=
          typeof(as.list(quote(symbol))[[1]])){
         stop("y, the column name of y, must be unquoted")
 }
@@ -33,7 +41,7 @@ if ( typeof(df) != 'list' ){
 
 #check if x exists in df
 if ( !(as.character(as.list(
-    rlang::get_expr(vars({{ x }})[[1]])
+    rlang::get_expr(ggplot2::vars({{ x }})[[1]])
     )))
     %in%
     colnames({{ df }})
@@ -43,7 +51,7 @@ if ( !(as.character(as.list(
 
 #check if y exists in df
 if ( !(as.character(as.list(
-        rlang::get_expr(vars({{ y }})[[1]])
+        rlang::get_expr(ggplot2::vars({{ y }})[[1]])
     )))
     %in%
     colnames({{ df }})
@@ -52,34 +60,34 @@ if ( !(as.character(as.list(
 }
 
 
-library(viridis)
+
 
 x_title <- str_replace(as.character
                            (as.list(
-                               rlang::get_expr(vars({{ x }})[[1]]))),
+                               rlang::get_expr(ggplot2::vars({{ x }})[[1]]))),
                            "[_!.]",
                            " ")
 
-y_title <- str_replace(as.character
+y_title <- stringr::str_replace(as.character
                        (as.list(
-                           rlang::get_expr(vars({{ y }})[[1]]))),
+                           rlang::get_expr(ggplot2::vars({{ y }})[[1]]))),
                            "[_!.]",
                            " ")
 
-plot <- ggplot(df) +
+plot <- ggplot2::ggplot(df) +
             geom_boxplot(aes(
                 x={{ x }},
                 y={{ y }},
                 fill= {{ x }}),
             ) +
-    scale_fill_viridis(discrete=TRUE, option="magma") +
+    viridis::scale_fill_viridis(discrete=TRUE, option="magma") +
     labs(x = x_title,
          y = y_title
          )
 
         if (facet == TRUE){
             return(plot  +
-                facet_wrap(vars({{ x }}))
+                ggplot2::facet_wrap(ggplot2::vars({{ x }}))
             )
         } else {
             return(plot)
