@@ -9,5 +9,19 @@
 #'
 #' @examples
 #' corrplot(df, print_corr = FALSE)
-corrplot <- function(df, print_corr=FALSE, shape="circle") {
+library(ggplot2)
+corrplot <- function(df, print_corr=FALSE) {
+    if(print_corr==TRUE) {
+        GGally::ggcorr(df, label = TRUE, label_size = 2) +
+            ggtitle("Correlation plot") +
+            theme(plot.title = element_text(size = 20, face = "bold"),
+                  axis.text = element_text(size=10),
+                  axis.title = element_text(size = 10))
+    } else {
+        GGally::ggcorr(df) +
+            ggtitle("Correlation plot") +
+            theme(plot.title = element_text(size = 20, face = "bold"),
+                  axis.text = element_text(size=10),
+                  axis.title = element_text(size = 10))
+    }
 }
