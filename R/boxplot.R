@@ -17,13 +17,18 @@ boxplot <- function(df, x, y, facet = FALSE){
 #check type of x
 if ( typeof(rlang::get_expr(vars({{ x }})[[1]])) !=
      typeof(as.list(quote(symbol))[[1]])){
-    stop("x must be unquoted")
+    stop("x, the column name for x, must be unquoted")
 }
 
-#check typr of y
+#check type of y
 if ( typeof(rlang::get_expr(vars({{ y }})[[1]])) !=
          typeof(as.list(quote(symbol))[[1]])){
-        stop("y must be unquoted")
+        stop("y, the column name of y, must be unquoted")
+}
+
+#check type of df
+if ( typeof(df) != 'list' ){
+        stop("df must be a dataframe")
 }
 
 #check if x exists in df
@@ -33,7 +38,7 @@ if ( !(as.character(as.list(
     %in%
     colnames({{ df }})
 ){
-    stop('Col name not found')
+    stop('x column name not found')
 }
 
 #check if y exists in df
@@ -43,7 +48,7 @@ if ( !(as.character(as.list(
     %in%
     colnames({{ df }})
 ){
-    stop('Col name not found')
+    stop('y column name not found')
 }
 
 
@@ -54,7 +59,11 @@ plot <- ggplot(df) +
                 x={{ x }},
                 y={{ y }},
                 fill= {{ x }}),
-            ) + scale_fill_viridis(discrete=TRUE, option="magma")
+            ) +
+    scale_fill_viridis(discrete=TRUE, option="magma") +
+    labs(x= as.character(as.list(rlang::get_expr(vars({{ x }})[[1]]))),
+         y= as.character(as.list(rlang::get_expr(vars({{ y }})[[1]])))
+         )
 
         if (facet == TRUE){
             return(plot  +
