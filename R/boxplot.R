@@ -13,7 +13,7 @@
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
-
+### input tests
 #check type of x
 if ( typeof(rlang::get_expr(vars({{ x }})[[1]])) !=
      typeof(as.list(quote(symbol))[[1]])){
@@ -54,6 +54,18 @@ if ( !(as.character(as.list(
 
 library(viridis)
 
+x_title <- str_replace(as.character
+                           (as.list(
+                               rlang::get_expr(vars({{ x }})[[1]]))),
+                           "[_!.]",
+                           " ")
+
+y_title <- str_replace(as.character
+                       (as.list(
+                           rlang::get_expr(vars({{ y }})[[1]]))),
+                           "[_!.]",
+                           " ")
+
 plot <- ggplot(df) +
             geom_boxplot(aes(
                 x={{ x }},
@@ -61,8 +73,8 @@ plot <- ggplot(df) +
                 fill= {{ x }}),
             ) +
     scale_fill_viridis(discrete=TRUE, option="magma") +
-    labs(x= as.character(as.list(rlang::get_expr(vars({{ x }})[[1]]))),
-         y= as.character(as.list(rlang::get_expr(vars({{ y }})[[1]])))
+    labs(x = x_title,
+         y = y_title
          )
 
         if (facet == TRUE){
