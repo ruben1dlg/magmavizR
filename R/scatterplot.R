@@ -1,3 +1,6 @@
+library(tidyverse)
+library(ggplot2)
+
 #' Create a scatterplot using the magma color scheme
 #'
 #' @param df A dataframe to use for the scatterplot.
@@ -5,15 +8,15 @@
 #' @param y Column-name of the numerical variable to be plotted on the y-axis
 #' @param c Column-name of the categorical variable to color-code the data points
 #'          Default value is blank for cases when there is no categorical column
-#' @param t Title of the plot. Default value is blank. 
+#' @param t Title of the plot. Default value is blank.
 #'          If not provided, title will be computed based on x, y and/or c
 #' @param o Opacity of the data points
 #' @param s Size of the data points
-#' @param xtitle Title of the x-axis. Default value is blank. 
+#' @param xtitle Title of the x-axis. Default value is blank.
 #'               If not provided, title will be proper case of the x axis column
-#' @param ytitle Title of the x-axis. Default value is blank. 
+#' @param ytitle Title of the x-axis. Default value is blank.
 #'               If not provided, title will be proper case of the y axis column
-#' @param ctitle Title of the x-axis. Default value is blank. 
+#' @param ctitle Title of the x-axis. Default value is blank.
 #'               If not provided, title will be proper case of the color column
 #' @param xzero Scale the x-axis to start from 0 by specifying True
 #'              Default value is set to False
@@ -32,4 +35,12 @@
 
 scatterplot <- function(df, x, y, c="", t="", o=0.5, s=50, xtitle="", ytitle="",
                         ctitle="", xzero=False, yzero=False, shapes=True) {
+    ggplot(
+        data = df,
+        aes(
+            x = x,
+            y = y
+        )
+    ) +
+    geom_point()
 }
