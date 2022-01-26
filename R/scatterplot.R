@@ -38,6 +38,27 @@ library(rlang)
 
 scatterplot <- function(df, x, y, c, t="") {
 
+    # check to ensure df is assigned a dataframe
+    if (typeof(df) != 'list') {
+        stop("Data assigned to df must be a dataframe")
+    }
+
+    # check to ensure x is not in quotes
+    if (
+        typeof(rlang::get_expr(ggplot2::vars({{ x }})[[1]])) !=
+        typeof(as.list(quote(symbol))[[1]])
+        ) {
+        stop("Column name assigned to x must not be in quotes")
+    }
+
+    # check to ensure y is not in quotes
+    if (
+        typeof(rlang::get_expr(ggplot2::vars({{ y }})[[1]])) !=
+        typeof(as.list(quote(symbol))[[1]])
+        ) {
+        stop("Column name assigned to y must not be in quotes")
+    }
+
     splot <- ggplot2::ggplot(df,
         ggplot2::aes(
             x = {{ x }},
@@ -48,7 +69,7 @@ scatterplot <- function(df, x, y, c, t="") {
         ggplot2::geom_point(
         ) +
         scale_colour_viridis_d(
-            option = "A"
+            option = "magma"
         ) +
         labs(
             title = t
