@@ -39,7 +39,7 @@ library(rlang)
 scatterplot <- function(df, x, y, c, t="") {
 
     # check to ensure df is assigned a dataframe
-    if (typeof(df) != 'list') {
+    if (!is.data.frame(df) == TRUE) {
         stop("Data assigned to df must be a dataframe")
     }
 
@@ -57,6 +57,16 @@ scatterplot <- function(df, x, y, c, t="") {
         typeof(as.list(quote(symbol))[[1]])
         ) {
         stop("Column name assigned to y must not be in quotes")
+    }
+
+    # check if column x is present in the df
+    if (!as.character(ggplot2::vars({{ x }})[[1]])[2] %in% colnames(df)) {
+        stop("Column assigned to x not found in dataframe")
+    }
+
+    # check if column y is present in the df
+    if (!as.character(ggplot2::vars({{ y }})[[1]])[2] %in% colnames(df)) {
+        stop("Column assigned to y not found in dataframe")
     }
 
     splot <- ggplot2::ggplot(df,
