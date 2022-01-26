@@ -1,5 +1,8 @@
 library(tidyverse)
 library(ggplot2)
+library(viridis)
+library(stringr)
+library(rlang)
 
 #' Create a scatterplot using the magma color scheme
 #'
@@ -33,14 +36,23 @@ library(ggplot2)
 #'                 "Iris Sepal Length vs Sepal Width across Species",
 #'                 1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
 
-scatterplot <- function(df, x, y, c="", t="", o=0.5, s=50, xtitle="", ytitle="",
-                        ctitle="", xzero=False, yzero=False, shapes=True) {
-    ggplot(
-        data = df,
-        aes(
-            x = x,
-            y = y
+scatterplot <- function(df, x, y, c, t="") {
+
+    splot <- ggplot2::ggplot(df,
+        ggplot2::aes(
+            x = {{ x }},
+            y = {{ y }},
+            color = {{ c }}
+            )
+        ) +
+        ggplot2::geom_point(
+        ) +
+        scale_colour_viridis_d(
+            option = "A"
+        ) +
+        labs(
+            title = t
         )
-    ) +
-    geom_point()
+
+return(splot)
 }
