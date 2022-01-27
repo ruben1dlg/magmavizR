@@ -32,9 +32,10 @@ library(rlang)
 #' @export
 #'
 #' @examples
-#' >>> scatterplot(iris, sepalLength, sepalWidth, species,
-#'                 "Iris Sepal Length vs Sepal Width across Species",
-#'                 0.7, 3.5, "Sepal Length", "Sepal Width", "", FALSE, FALSE, TRUE)
+#' > penguins_data <- palmerpenguins::penguins
+#' > scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species,
+#'               "Bill and Flipper length clusters by Species",
+#'               0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
 
 scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=FALSE) {
 
@@ -125,17 +126,17 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
 
     # renaming x axis if custom x axis title not assigned
     if (xtitle == "") {
-        xtitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " "))
+        xtitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " "))
     }
 
     # renaming y axis if custom x axis title not assigned
     if (ytitle == "") {
-        ytitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " "))
+        ytitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " "))
     }
 
     # renaming x axis if custom x axis title not assigned
     if (ctitle == "") {
-        ctitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ c }})[[1]])[2], "[_!.]", " "))
+        ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ c }})[[1]])[2], "[_!.]", " "))
     }
 
     # check if xzero is logical or not
