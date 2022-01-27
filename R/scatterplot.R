@@ -36,7 +36,9 @@ library(rlang)
 #'                 "Iris Sepal Length vs Sepal Width across Species",
 #'                 1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
 
-scatterplot <- function(df, x, y, c, t="") {
+scatterplot <- function(df, x, y, c=NULL, t="") {
+
+    base::missing(c)
 
     # check to ensure df is assigned a dataframe
     if (!is.data.frame(df) == TRUE) {
@@ -45,7 +47,7 @@ scatterplot <- function(df, x, y, c, t="") {
 
     # check to ensure x is not in quotes
     if (
-        typeof(rlang::get_expr(ggplot2::vars({{ x }})[[1]])) !=
+        typeof(substitute(x)) !=
         typeof(as.list(quote(symbol))[[1]])
         ) {
         stop("Column name assigned to 'x' must not be in quotes")
@@ -53,18 +55,10 @@ scatterplot <- function(df, x, y, c, t="") {
 
     # check to ensure y is not in quotes
     if (
-        typeof(rlang::get_expr(ggplot2::vars({{ y }})[[1]])) !=
+        typeof(substitute(y)) !=
         typeof(as.list(quote(symbol))[[1]])
     ) {
         stop("Column name assigned to 'y' must not be in quotes")
-    }
-
-    # check to ensure c is not in quotes
-    if (
-        typeof(rlang::get_expr(ggplot2::vars({{ c }})[[1]])) !=
-        typeof(as.list(quote(symbol))[[1]])
-    ) {
-        stop("Column name assigned to 'color' must not be in quotes")
     }
 
     # check if column x is present in the df
@@ -77,9 +71,43 @@ scatterplot <- function(df, x, y, c, t="") {
         stop("Column assigned to 'y' not found in dataframe")
     }
 
-    # check if column c is present in the df
-    if (!as.character(ggplot2::vars({{ c }})[[1]])[2] %in% colnames(df)) {
-        stop("Column assigned to 'color' not found in dataframe")
+    # check if column has been assigned to color c
+    if (is.null(substitute(c)) == TRUE) {
+        # if c is NULL (default) keep only x and y in title if title is blank
+        if (t == "") {
+            t <- paste(
+                str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " ")),
+                "vs",
+                str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " ")),
+                sep = " "
+            )
+        }
+    # checks for when a column is assigned to c
+    } else {
+        # check to ensure c is not in quotes
+        if (
+            (typeof(rlang::get_expr(ggplot2::vars({{ c }})[[1]])) !=
+             typeof(as.list(quote(symbol))[[1]]))
+        ) {
+            stop("Column name assigned to 'color' must not be in quotes")
+        }
+
+        # check if column c is present in the df
+        if (!as.character(ggplot2::vars({{ c }})[[1]])[2] %in% colnames(df)) {
+            stop("Column assigned to 'color' not found in dataframe")
+        }
+
+        # add color variable to title along with x and y if title is blank
+        if (t == "") {
+            t <- paste(
+                str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " ")),
+                "vs",
+                str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " ")),
+                "by",
+                str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ c }})[[1]])[2], "[_!.]", " ")),
+                sep = " "
+            )
+        }
     }
 
     splot <- ggplot2::ggplot(df,
