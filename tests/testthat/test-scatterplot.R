@@ -14,4 +14,11 @@ sample_data <- dplyr::tibble(
                      10083831, 7988479, 9872424)
 )
 
-scatter_default <- scatterplot(sample_data, year, no_of_cars)
+scatter_basic <- scatterplot(sample_data, year, no_of_cars)
+
+
+test_that('Scatterplot should use geom_point and map x to x-axis, and y to y-axis.', {
+    expect_true("GeomPoint" %in% c(class(scatter_basic$layers[[1]]$geom)))
+    expect_true("year"  == rlang::get_expr(scatter_basic$mapping$x))
+    expect_true("no_of_cars" == rlang::get_expr(scatter_basic$mapping$y))
+})
