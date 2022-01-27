@@ -37,7 +37,7 @@ library(rlang)
 #'               "Bill and Flipper length clusters by Species",
 #'               0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
 
-scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=FALSE) {
+scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=FALSE) {
 
     base::missing(c)
 
