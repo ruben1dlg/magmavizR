@@ -17,8 +17,14 @@ sample_data <- dplyr::tibble(
 scatter_basic <- scatterplot(sample_data, year, no_of_cars)
 
 
-test_that('Scatterplot should use geom_point and map x to x-axis, and y to y-axis.', {
+test_that('Scatterplot (basic) should use geom_point and map x to x-axis, and y to y-axis.', {
     expect_true("GeomPoint" %in% c(class(scatter_basic$layers[[1]]$geom)))
     expect_true("year"  == rlang::get_expr(scatter_basic$mapping$x))
     expect_true("no_of_cars" == rlang::get_expr(scatter_basic$mapping$y))
+})
+
+test_that('Scatterplot (basic) must have default values for all parameters except df, x, and y.', {
+    expect_null(rlang::get_expr(scatter_basic$mapping$c))
+    expect_true(0.5 == rlang::get_expr(scatter_basic$layers[[1]]$aes_params$alpha))
+    expect_true(3 == rlang::get_expr(scatter_basic$layers[[1]]$aes_params$size))
 })
