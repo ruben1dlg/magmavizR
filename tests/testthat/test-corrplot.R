@@ -1,4 +1,6 @@
 library(palmerpenguins)
+library(ggplot2)
+library(GGally)
 
 plot <- corrplot(penguins, print_corr = FALSE, title = "Correlation")
 
