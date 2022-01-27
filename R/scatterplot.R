@@ -34,9 +34,9 @@ library(rlang)
 #' @examples
 #' >>> scatterplot(iris, sepalLength, sepalWidth, species,
 #'                 "Iris Sepal Length vs Sepal Width across Species",
-#'                 1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
+#'                 0.7, 3.5, "Sepal Length", "Sepal Width", "", FALSE, FALSE, TRUE)
 
-scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="") {
+scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=TRUE) {
 
     base::missing(c)
 
@@ -92,10 +92,12 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
         stop("Title must be assigned in quotes as a string.")
     }
 
+    # check range of opacity input
     if (o < 0.1 | o > 1.0) {
         stop("Opacity (alpha) must be between 0.1 and 1.0 (inclusive).")
     }
 
+    # check range of size input
     if (s < 1 | s > 5) {
         stop("Size must be between 1 and 5 (inclusive).")
     }
@@ -116,22 +118,37 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
     }
 
     # renaming x axis if custom x axis title not assigned
-    if(xtitle == "") {
+    if (xtitle == "") {
         xtitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " "))
     }
 
     # renaming y axis if custom x axis title not assigned
-    if(ytitle == "") {
+    if (ytitle == "") {
         ytitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " "))
     }
 
     # renaming x axis if custom x axis title not assigned
-    if(ctitle == "") {
+    if (ctitle == "") {
         ctitle <- str_to_sentence(str_replace_all(as.character(ggplot2::vars({{ c }})[[1]])[2], "[_!.]", " "))
     }
 
+    # check if xzero is logical or not
+    if (!typeof(substitute(xzero)) == 'logical') {
+        print(typeof(substitute(xzero)))
+    }
+
+    # check if yzero is logical or not
+    if (!typeof(substitute(yzero)) == 'logical') {
+        print(typeof(substitute(yzero)))
+    }
+
+    # check if shapes is logical or not
+    if (!typeof(substitute(shapes)) == 'logical') {
+        print(typeof(substitute(shapes)))
+    }
+
     # defining title based on x, y and/or c names if no title assigned
-    if(t == "") {
+    if (t == "") {
         # if c is NULL (default) keep only x and y in title if title is blank
         if (is.null(substitute(c)) == TRUE) {
             t <- paste(xtitle, "vs", ytitle, sep = " ")
@@ -141,13 +158,14 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
         }
     }
 
+    # scatterplot
     splot <- ggplot2::ggplot(df,
         ggplot2::aes(
             x = {{ x }},
             y = {{ y }},
             color = {{ c }}
-            )
-        ) +
+        )
+    ) +
         ggplot2::geom_point(
             alpha = o,
             size = s
@@ -161,6 +179,21 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
             y = ytitle,
             color = ctitle
         )
+
+    # assign color column to shape if shapes is TRUE
+    if (!is.null(substitute(c)) == TRUE & shapes == TRUE) {
+        splot <- splot + ggplot2::aes(shape = {{ c }}) + labs(shape = ctitle)
+    }
+
+    # set x-axis to begin from zero
+    if (xzero == TRUE) {
+        splot <- splot + xlim(0, NA)
+    }
+
+    # set y-axis to begin from zero
+    if (yzero == TRUE) {
+        splot <- splot + ylim(0, NA)
+    }
 
 return(splot)
 }
