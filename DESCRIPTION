@@ -2,10 +2,10 @@ Package: magmavizR
 Title: magmavizR is a plotting package
 Version: 0.0.0.1
 Authors@R: 
-    c(person(given = "Ruben", family = "De la Garza", role = c("aut", "cre")),
-    person(given = "Irene", family = "Yan", role = c("aut", "cre")),
-    person(given = "Mukund", family = "Iyer", role = c("aut", "cre")),
-    person(given = "Adbul Moid", family = "Mohammed", role = c("aut", "cre")))           
+    c(person(given = "Ruben", family = "De la Garza", role = c("aut", "cre"), email="ruben1dlg@gmail.com"),
+    person(given = "Irene", family = "Yan", email="ruben1dlg@gmail.com"),
+    person(given = "Mukund", family = "Iyer", email="ruben1dlg@gmail.com"),
+    person(given = "Adbul Moid", family = "Mohammed", email="ruben1dlg@gmail.com"))           
 Description: This is a plotting package that has a purpleorange color theme.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -16,4 +16,6 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
-    ggplot2
+    ggplot2,
+    GGally,
+    palmerpenguins
