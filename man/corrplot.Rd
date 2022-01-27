@@ -2,23 +2,25 @@
 % Please edit documentation in R/corrplot.R
 \name{corrplot}
 \alias{corrplot}
-\title{Create a correlation plot}
+\title{Generates a correlation plot for the numeric variables in a dataframe,
+and prints the correlation values.}
 \usage{
-corrplot(df, print_corr = FALSE, shape = "circle")
+corrplot(df, print_corr = FALSE, title = "Correlation Plot")
 }
 \arguments{
-\item{df}{A dataframe to use for the correlation plot.}
+\item{df}{The dataframe containing the data to be plotted.}
 
 \item{print_corr}{Whether or not to print the correlation values between variables}
 
-\item{shape}{Shape to use in the plot}
+\item{title}{Title of the plot}
 }
 \value{
 A ggplot object.
 }
 \description{
-Create a correlation plot
+Generates a correlation plot for the numeric variables in a dataframe,
+and prints the correlation values.
 }
 \examples{
-corrplot(df, print_corr = FALSE, shape = "square")
+corrplot(df, print_corr = FALSE, title = "Correlation chart")
 }

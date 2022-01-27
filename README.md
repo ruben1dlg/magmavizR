@@ -20,13 +20,47 @@ outlined below:
 
 ### Boxplot
 
+Returns a boxplot based on the data frame, a numerical feature to view
+the distribution of and a categorical feature to bucket data into
+categories. Additionally, there is a boolean option to facet the
+boxplots into separate charts.
+
 ### Correlation plot
+
+Returns a correlation plot based on the numerical features present in
+the data frame. Additionally, it will print the correlated numerical
+feature pairs along with their correlation values.
 
 ### Histogram
 
+Returns a histogram based on the data frame and a categorical feature to
+plot on the x-axis. The y-axis will display the count of records, among
+other aggregating functions.
+
 ### Scatterplot
 
+Returns a scatterplot based on the data frame and two numerical feature
+names passed as the required inputs. An auxiliary input provides the
+flexibility to color-code the data points based on a categorical
+feature.
+
 ### Fit within R ecosystem
+
+Our package will build onto the existing features of ‘ggplot’ using the
+magma color scheme. It serves as an automated plotter and is a higher
+level implementation of it. Essentially it circumvents the need to code
+every single detail and allows the user to focus on the output. We came
+across two packages on CRAN that have a similar line of thought:
+
+-   \[quickplot\]
+    <https://cran.r-project.org/web/packages/quickPlot/index.html> -
+    also a high level package based on ggplot that generates plots
+    modularly.
+
+-   \[BoutrosLab.plotting.general\]
+    (<https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/index.html>) -
+    same motivation as this package, plots on a high level with a
+    standard format. It does not use ggplot however.
 
 ## Installation
 
