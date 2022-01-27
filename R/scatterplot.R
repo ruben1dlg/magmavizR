@@ -7,8 +7,8 @@ library(rlang)
 #' Create a scatterplot using the magma color scheme
 #'
 #' @param df A dataframe to use for the scatterplot.
-#' @param x Column-name of the numerical variable to be plotted on the x-axis
-#' @param y Column-name of the numerical variable to be plotted on the y-axis
+#' @param x Column-name of the numerical or categorical variable to be plotted on the x-axis
+#' @param y Column-name of the numerical or categorical variable to be plotted on the y-axis
 #' @param c Column-name of the categorical variable to color-code the data points
 #'          Default value is blank for cases when there is no categorical column
 #' @param t Title of the plot. Default value is blank.
@@ -21,12 +21,12 @@ library(rlang)
 #'               If not provided, title will be proper case of the y axis column
 #' @param ctitle Title of the x-axis. Default value is blank.
 #'               If not provided, title will be proper case of the color column
-#' @param xzero Scale the x-axis to start from 0 by specifying True
-#'              Default value is set to False
-#' @param yzero Scale the x-axis to start from 0 by specifying True
-#'              Default value is set to False
-#' @param shapes Assign the color column to the shape attribute of the plot if True
-#'               Default value is set to True
+#' @param xzero Scale the x-axis to start from 0 by specifying TRUE
+#'              Default value is set to FALSE
+#' @param yzero Scale the x-axis to start from 0 by specifying TRUE
+#'              Default value is set to FALSE
+#' @param shapes Assign the color column to the shape attribute of the plot if TRUE
+#'               Default value is set to FALSE
 #'
 #' @return A ggplot object.
 #' @export
@@ -36,7 +36,7 @@ library(rlang)
 #'                 "Iris Sepal Length vs Sepal Width across Species",
 #'                 0.7, 3.5, "Sepal Length", "Sepal Width", "", FALSE, FALSE, TRUE)
 
-scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=TRUE) {
+scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle="", ctitle="", xzero=FALSE, yzero=FALSE, shapes=FALSE) {
 
     base::missing(c)
 
@@ -84,6 +84,12 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
         # check if column c is present in the df
         if (!as.character(ggplot2::vars({{ c }})[[1]])[2] %in% colnames(df)) {
             stop("Column assigned to 'color' not found in dataframe.")
+        }
+
+        # check if column assigned to c is either of type character or factor
+        if (!class(df[[as.character(ggplot2::vars({{ c }})[[1]])[2]]]) == "character" &
+            !class(df[[as.character(ggplot2::vars({{ c }})[[1]])[2]]]) == "factor") {
+            stop("Column assigned to 'color' must be of type 'character' or 'factor'.")
         }
     }
 
@@ -161,19 +167,19 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
     # scatterplot
     splot <- ggplot2::ggplot(df,
         ggplot2::aes(
-            x = {{ x }},
-            y = {{ y }},
-            color = {{ c }}
-        )
-    ) +
+                x = {{ x }},
+                y = {{ y }},
+                color = {{ c }}
+            )
+        ) +
         ggplot2::geom_point(
             alpha = o,
             size = s
         ) +
-        scale_colour_viridis_d(
+        ggplot2::scale_colour_viridis_d(
             option = "magma"
         ) +
-        labs(
+        ggplot2::labs(
             title = t,
             x = xtitle,
             y = ytitle,
@@ -182,17 +188,18 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5, xtitle="", ytitle=""
 
     # assign color column to shape if shapes is TRUE
     if (!is.null(substitute(c)) == TRUE & shapes == TRUE) {
-        splot <- splot + ggplot2::aes(shape = {{ c }}) + labs(shape = ctitle)
+        splot <- splot + ggplot2::aes(shape = {{ c }}) +
+                         ggplot2::labs(shape = ctitle)
     }
 
     # set x-axis to begin from zero
     if (xzero == TRUE) {
-        splot <- splot + xlim(0, NA)
+        splot <- splot + ggplot2::xlim(0, NA)
     }
 
     # set y-axis to begin from zero
     if (yzero == TRUE) {
-        splot <- splot + ylim(0, NA)
+        splot <- splot + ggplot2::ylim(0, NA)
     }
 
 return(splot)
