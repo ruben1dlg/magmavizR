@@ -13,8 +13,8 @@ library(rlang)
 #'          Default value is blank for cases when there is no categorical column
 #' @param t Title of the plot. Default value is blank.
 #'          If not provided, title will be computed based on x, y and/or c
-#' @param o Opacity of the data points
-#' @param s Size of the data points
+#' @param o Opacity of the data points. Number between 0.1 and 1.0 (inclusive)
+#' @param s Size of the data points. Number between 1 and 5 (inclusive)
 #' @param xtitle Title of the x-axis. Default value is blank.
 #'               If not provided, title will be proper case of the x axis column
 #' @param ytitle Title of the x-axis. Default value is blank.
@@ -36,7 +36,7 @@ library(rlang)
 #'                 "Iris Sepal Length vs Sepal Width across Species",
 #'                 1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
 
-scatterplot <- function(df, x, y, c=NULL, t="") {
+scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=5) {
 
     base::missing(c)
 
@@ -110,6 +110,14 @@ scatterplot <- function(df, x, y, c=NULL, t="") {
         }
     }
 
+    if (o < 0.1 | o > 1.0) {
+        stop("Opacity (alpha) must be between 0.1 and 1.0 (inclusive)")
+    }
+
+    if (s < 1 | s > 5) {
+        stop("Size must be between 1 and 5 (inclusive)")
+    }
+
     splot <- ggplot2::ggplot(df,
         ggplot2::aes(
             x = {{ x }},
@@ -118,6 +126,8 @@ scatterplot <- function(df, x, y, c=NULL, t="") {
             )
         ) +
         ggplot2::geom_point(
+            alpha = o,
+            size = s
         ) +
         scale_colour_viridis_d(
             option = "magma"
