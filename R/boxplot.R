@@ -1,18 +1,16 @@
 #' Plot a boxplot with the magma color scheme and an option to facet.
 #'
 #' @param df Dataframe containing the variables for plotting
-#' @param x Column name of the numerical variable to view the distribution of
-#' @param y Column name containing the categorical variables to assign boxes to
+#' @param x Column name of the categorical variable to view the distribution of
+#' @param y Column name containing the numerical variables to assign boxes to
 #' @param facet Determines whether separate graphs will be created for each category
 #'
 #' @return a ggplot object
-#'
-#'
-#'
+
 #' @export
 #'
 #' @examples
-#' function(df, Length, Species, TRUE)
+#' boxplot(df, Length, Species, TRUE)
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
@@ -20,6 +18,7 @@ library(viridis)
 library(stringr)
 library(rlang)
 library(ggplot2)
+library(dplyr)
 
 ### input tests
 #check type of x
@@ -59,10 +58,24 @@ if ( !(as.character(as.list(
     stop('y column name not found')
 }
 
+#check the type for x
+if(!(
+        is.character((df |> dplyr::select({{ x }}))[[1]]) |
+        is.factor((df |> dplyr::select({{ x }}))[[1]]))
+    ){
+        stop('x needs to have distinct categories')
+}
+
+#check the type for y
+if(!(
+        is.numeric((df |> dplyr::select({{ y }}))[[1]])
+    )){
+        stop('y needs to be numeric')
+}
 
 
 
-x_title <- str_replace(as.character
+x_title <- stringr::str_replace(as.character
                            (as.list(
                                rlang::get_expr(ggplot2::vars({{ x }})[[1]]))),
                            "[_!.]",
@@ -83,7 +96,8 @@ plot <- ggplot2::ggplot(df) +
     viridis::scale_fill_viridis(discrete=TRUE, option="magma") +
     labs(x = x_title,
          y = y_title
-         )
+         ) +
+    theme(legend.position = "none")
 
         if (facet == TRUE){
             return(plot  +
@@ -94,5 +108,3 @@ plot <- ggplot2::ggplot(df) +
         }
 return(plot)
 }
-
-
