@@ -18,4 +18,9 @@ Config/testthat/edition: 3
 Imports: 
     ggplot2,
     GGally,
-    palmerpenguins
+    palmerpenguins,
+    viridis,
+    stringr,
+    rlang
+Depends: 
+    tidyverse
