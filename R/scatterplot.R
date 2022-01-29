@@ -63,12 +63,12 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
     }
 
     # check if column x is present in the df
-    if (!as.character(ggplot2::vars({{ x }})[[1]])[2] %in% colnames(df)) {
+    if (!as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
         stop("Column assigned to 'x' not found in dataframe.")
     }
 
     # check if column y is present in the df
-    if (!as.character(ggplot2::vars({{ y }})[[1]])[2] %in% colnames(df)) {
+    if (!as_name(ggplot2::vars({{ y }})[[1]]) %in% colnames(df)) {
         stop("Column assigned to 'y' not found in dataframe.")
     }
 
@@ -83,13 +83,13 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
         }
 
         # check if column c is present in the df
-        if (!as.character(ggplot2::vars({{ c }})[[1]])[2] %in% colnames(df)) {
+        if (!as_name(ggplot2::vars({{ c }})[[1]]) %in% colnames(df)) {
             stop("Column assigned to 'color' not found in dataframe.")
         }
 
         # check if column assigned to c is either of type character or factor
-        if (!class(df[[as.character(ggplot2::vars({{ c }})[[1]])[2]]]) == "character" &
-            !class(df[[as.character(ggplot2::vars({{ c }})[[1]])[2]]]) == "factor") {
+        if (!class(df[[as_name(ggplot2::vars({{ c }})[[1]])]]) == "character" &
+            !class(df[[as_name(ggplot2::vars({{ c }})[[1]])]]) == "factor") {
             stop("Column assigned to 'color' must be of type 'character' or 'factor'.")
         }
     }
@@ -126,17 +126,17 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
 
     # renaming x axis if custom x axis title not assigned
     if (xtitle == "") {
-        xtitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ x }})[[1]])[2], "[_!.]", " "))
+        xtitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ x }})[[1]]), "[_!.]", " "))
     }
 
     # renaming y axis if custom x axis title not assigned
     if (ytitle == "") {
-        ytitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ y }})[[1]])[2], "[_!.]", " "))
+        ytitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ y }})[[1]]), "[_!.]", " "))
     }
 
     # renaming x axis if custom x axis title not assigned
     if (ctitle == "") {
-        ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as.character(ggplot2::vars({{ c }})[[1]])[2], "[_!.]", " "))
+        ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ c }})[[1]]), "[_!.]", " "))
     }
 
     # check if xzero is logical or not
