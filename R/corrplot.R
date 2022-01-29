@@ -31,12 +31,14 @@ corrplot <- function(df, print_corr=FALSE, title="Correlation Plot") {
     if(print_corr==TRUE) {
         GGally::ggcorr(df, label = TRUE, label_size = 2) +
             ggplot2::ggtitle(title) +
+            ggplot2::scale_fill_viridis_c(option = "magma") +
             ggplot2::theme(plot.title = ggplot2::element_text(size = 20, face = "bold"),
                   axis.text = ggplot2::element_text(size=10),
                   axis.title = ggplot2::element_text(size = 10))
     } else {
         GGally::ggcorr(df) +
             ggplot2::ggtitle(title) +
+            ggplot2::scale_fill_viridis_c(option = "magma") +
             ggplot2::theme(plot.title = ggplot2::element_text(size = 20, face = "bold"),
                   axis.text = ggplot2::element_text(size=20),
                   axis.title = ggplot2::element_text(size = 20))
