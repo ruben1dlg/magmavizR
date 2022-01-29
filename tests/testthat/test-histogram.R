@@ -8,7 +8,6 @@ test_that("The check for inputs df, x, y is failing", {
   expect_error(magmavizR::histogram(mtcars, mpk, count), "Column assigned to 'x' is not found in dataframe.")
   expect_error(magmavizR::histogram(iris, Species, '..density..'), "Column assigned to 'x' is not numeric.")
   expect_error(magmavizR::histogram(iris, Sepal.Length, ..density..), "The aggregation function assigned to 'y' must be in quotes.")
-  expect_error(magmavizR::histogram(iris, Sepal.Length, ".density.."), "Value assigned to 'y' should start with '..' and end with '..'.")
 })
 
 
