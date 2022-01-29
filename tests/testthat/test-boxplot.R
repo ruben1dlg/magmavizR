@@ -34,7 +34,8 @@ test_that("The check for input type for y is failing",{
 
 
 test_that("The check for input type for df is failing",{
-    expect_error(boxplot(df$miles_per_gallon, miles_per_gallon, origin))
+    expect_error(boxplot(df$miles_per_gallon, miles_per_gallon, origin),
+                 'df must be a dataframe or tibble')
 })
 
 test_that("The check for column name for x is failing",{
