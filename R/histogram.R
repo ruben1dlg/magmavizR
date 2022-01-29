@@ -19,6 +19,11 @@
 #' histogram(mtcars, wt, "..count..")
 #' histogram(mtcars, mpg, "..ndensity..')
 
+library(ggplot2)
+library(dplyr)
+library(rlang)
+library(viridis)
+
 histogram <- function(df, x, y) {
   aggregation_functions = c("..count..", "..density..",
                             "..ncount..", "..ndensity..",
