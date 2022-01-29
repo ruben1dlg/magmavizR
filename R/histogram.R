@@ -13,5 +13,19 @@
 #' @examples
 #' histogram(mtcars, vs, 'min(mpg)')
 #' histogram(mtcars, vs, 'count()')
+
 histogram <- function(df, x, y) {
+  if (!is.data.frame(df)) {
+    stop("Data assigned to 'df' must be a dataframe.")
+  }
+  
+  # Checking if print_corr is boolean
+  if (!)) {
+    stop("print_corr needs to be boolean.")
+  }
+  
+  # Checking if title is string
+  if (!is.character(title)) {
+    stop("Title needs to be a string")
+  }
 }
