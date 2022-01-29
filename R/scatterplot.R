@@ -136,7 +136,9 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
 
     # renaming x axis if custom x axis title not assigned
     if (ctitle == "") {
-        ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ c }})[[1]]), "[_!.]", " "))
+        if (!is.null(substitute(c)) == TRUE) {
+            ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ c }})[[1]]), "[_!.]", " "))
+        }
     }
 
     # check if xzero is logical or not
