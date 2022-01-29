@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' boxplot(df, Length, Species, TRUE)
+#' boxplot(df, Length, Species, facet = TRUE)
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
@@ -33,12 +33,14 @@ if ( typeof(rlang::get_expr(ggplot2::vars({{ y }})[[1]])) !=
         stop("y, the column name of y, must be unquoted")
 }
 
-    #check type of df
-if ( typeof(df) != 'list' ){
-        stop("df must be a dataframe")
+#check type of df
+if ( (class(df)[1] != "data.frame") &
+         (class(df)[1] != "tbl_df")
+    ){
+        stop("df must be a dataframe or tibble")
 }
 
-    #check if x exists in df
+#check if x exists in df
 if ( !(as.character(as.list(
         rlang::get_expr(ggplot2::vars({{ x }})[[1]])
     )))
@@ -48,7 +50,7 @@ if ( !(as.character(as.list(
         stop('x column name not found')
 }
 
-    #check if y exists in df
+#check if y exists in df
 if ( !(as.character(as.list(
         rlang::get_expr(ggplot2::vars({{ y }})[[1]])
     )))
@@ -58,15 +60,15 @@ if ( !(as.character(as.list(
         stop('y column name not found')
 }
 
-    #check the type for x
-if(!(
+#check the type for x
+if( !(
         is.character((df |> dplyr::select({{ x }}))[[1]]) |
         is.factor((df |> dplyr::select({{ x }}))[[1]]))
     ){
         stop('x needs to have distinct categories')
 }
 
-    #check the type for y
+#check the type for y
 if(!(
         is.numeric((df |> dplyr::select({{ y }}))[[1]])
     )){
@@ -88,16 +90,16 @@ y_title <- stringr::str_replace(as.character
                                     " ")
 
 plot <- ggplot2::ggplot(df) +
-        geom_boxplot(aes(
+        ggplot2::geom_boxplot(ggplot2::aes(
             x={{ x }},
             y={{ y }},
             fill= {{ x }}),
         ) +
         viridis::scale_fill_viridis(discrete=TRUE, option="magma") +
-        labs(x = x_title,
+        ggplot2::labs(x = x_title,
              y = y_title
         ) +
-        theme(legend.position = "none")
+        ggplot2::theme(legend.position = "none")
 
 if (facet == TRUE){
         return(plot  +

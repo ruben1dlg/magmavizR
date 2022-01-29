@@ -16,8 +16,13 @@
 #' @export
 #'
 #' @examples
-#' histogram(mtcars, vs, "..count..")
-#' histogram(mtcars, vs, "..ndensity..')
+#' histogram(mtcars, wt, "..count..")
+#' histogram(mtcars, mpg, "..ndensity..')
+
+library(ggplot2)
+library(dplyr)
+library(rlang)
+library(viridis)
 
 library(ggplot2)
 library(dplyr)
@@ -43,7 +48,7 @@ histogram <- function(df, x, y) {
   }
   
   # check to ensure x is present in the df
-  if (!as.character(ggplot2::vars({{ x }})[[1]])[2] %in% colnames(df)) {
+  if (!as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
     stop("Column assigned to 'x' is not found in dataframe.")
   }
   
@@ -60,10 +65,6 @@ histogram <- function(df, x, y) {
   }
 
   # check to ensure y is in the correct format and has the supported value
-  if (!startsWith(y, "..") || !endsWith(y, "..") ) {
-    stop("Value assigned to 'y' should start with '..' and end with '..'.")
-  }
-  
   if (!is.element(y, aggregation_functions)) {
     stop(paste0("Value assigned to 'y' should be one of [",
                 paste(sapply(aggregation_functions, paste, collapse = ""), collapse = " "),
