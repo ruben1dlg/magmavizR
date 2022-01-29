@@ -35,7 +35,8 @@ test_that("The check for input type for y is failing",{
 
 test_that("The check for input type for df is failing",{
     expect_error(boxplot(c(1,2), miles_per_gallon, origin,
-                         "y, the column name of y, must be unquoted"))
+                         "a data frame with at least 1 numerical and 1
+                          categorical column must be supplied"))
 })
 
 test_that("The check for column name for x is failing",{
