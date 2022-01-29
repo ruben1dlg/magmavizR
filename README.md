@@ -13,10 +13,27 @@ plots with the magma color scheme. To maximize interpretability, the
 plots have defined color schemes (discrete, diverging, sequential) based
 on the kind of data they show.
 
-## Functions
+## Installation
 
-The four data visualization functions included in the package are
-outlined below:
+The development version of the package can be installed from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("UBC-MDS/magmavizR")
+```
+
+## Usage
+
+The magmavizR library can be loaded by using the commands below:
+
+``` r
+library("magmavizR")
+penguins_data <- palmerpenguins::penguins
+```
+
+The four data visualization functions included in the package along with
+the usage are outlined below:
 
 ### Boxplot
 
@@ -25,24 +42,72 @@ the distribution of and a categorical feature to bucket data into
 categories. Additionally, there is a boolean option to facet the
 boxplots into separate charts.
 
+``` r
+boxplot(penguins_data, species, bill_length_mm, facet = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
 ### Correlation plot
 
 Returns a correlation plot based on the numerical features present in
 the data frame. Additionally, it will print the correlated numerical
 feature pairs along with their correlation values.
 
+``` r
+corrplot(penguins_data, print_corr = TRUE, title = "Correlation Plot")
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
 ### Histogram
 
 Returns a histogram based on the data frame and a categorical feature to
-plot on the x-axis. The y-axis will display the count of records, among
-other aggregating functions.
+plot on the x-axis. The y-axis will display the result of some of the
+following aggregating functions:
+
+-   Average
+
+-   Count
+
+-   Distinct
+
+-   Max
+
+-   Min
+
+-   Median
+
+-   Mean
+
+-   Among others (listed in documentation for the function).
+
+``` r
+histogram(penguins_data, bill_length_mm, "..count..")
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ### Scatterplot
 
 Returns a scatterplot based on the data frame and two numerical feature
-names passed as the required inputs. An auxiliary input provides the
-flexibility to color-code the data points based on a categorical
-feature.
+names passed as the required inputs. There are auxiliary inputs that
+provide the flexibility to:
+
+-   Color code or change the shape of the data points on a categorical
+    variable
+
+-   Set a title to the plot, x-axis, y-axis and color legend
+
+-   Change the opacity and size of the data points
+
+-   Set the scale of the x-axis and y-axis to start from zero
+
+``` r
+scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species, "Bill and Flipper length clusters by Species", 0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ### Fit within R ecosystem
 
@@ -61,12 +126,6 @@ across two packages on CRAN that have a similar line of thought:
     (<https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/index.html>) -
     same motivation as this package, plots on a high level with a
     standard format. It does not use ggplot however.
-
-## Installation
-
-## Usage
-
-This section will be updated as progress is made.
 
 ## Contributing
 

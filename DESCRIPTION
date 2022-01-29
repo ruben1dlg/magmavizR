@@ -21,6 +21,7 @@ Imports:
     palmerpenguins,
     viridis,
     stringr,
-    rlang
+    rlang,
+    knitr
 Depends: 
     tidyverse
