@@ -4,6 +4,10 @@
 # magmavizR
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/UBC-MDS/magmavizR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/magmavizR?branch=master)
+
 <!-- badges: end -->
 
 Exploratory Data Analysis is one of the key steps in a machine learning
@@ -21,6 +25,56 @@ The development version of the package can be installed from
 ``` r
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/magmavizR")
+#> Rcpp      (1.0.7  -> 1.0.8 ) [CRAN]
+#> glue      (1.4.2  -> 1.6.1 ) [CRAN]
+#> rlang     (0.4.11 -> 1.0.0 ) [CRAN]
+#> cli       (3.0.1  -> 3.1.1 ) [CRAN]
+#> fansi     (0.5.0  -> 1.0.2 ) [CRAN]
+#> tibble    (3.1.5  -> 3.1.6 ) [CRAN]
+#> magrittr  (2.0.1  -> 2.0.2 ) [CRAN]
+#> stringi   (1.7.5  -> 1.7.6 ) [CRAN]
+#> jsonlite  (1.7.2  -> 1.7.3 ) [CRAN]
+#> xml2      (1.3.2  -> 1.3.3 ) [CRAN]
+#> digest    (0.6.28 -> 0.6.29) [CRAN]
+#> yaml      (2.2.1  -> 2.2.2 ) [CRAN]
+#> fs        (1.5.0  -> 1.5.2 ) [CRAN]
+#> tzdb      (0.1.2  -> 0.2.0 ) [CRAN]
+#> backports (1.2.1  -> 1.4.1 ) [CRAN]
+#> readr     (2.0.2  -> 2.1.1 ) [CRAN]
+#> 
+#>   There are binary versions available but the source versions are later:
+#>          binary source needs_compilation
+#> glue      1.6.0  1.6.1              TRUE
+#> rlang    0.4.12  1.0.0              TRUE
+#> magrittr  2.0.1  2.0.2              TRUE
+#> 
+#> package 'Rcpp' successfully unpacked and MD5 sums checked
+#> package 'cli' successfully unpacked and MD5 sums checked
+#> package 'fansi' successfully unpacked and MD5 sums checked
+#> package 'tibble' successfully unpacked and MD5 sums checked
+#> package 'stringi' successfully unpacked and MD5 sums checked
+#> package 'jsonlite' successfully unpacked and MD5 sums checked
+#> package 'xml2' successfully unpacked and MD5 sums checked
+#> package 'digest' successfully unpacked and MD5 sums checked
+#> package 'yaml' successfully unpacked and MD5 sums checked
+#> package 'fs' successfully unpacked and MD5 sums checked
+#> package 'tzdb' successfully unpacked and MD5 sums checked
+#> package 'backports' successfully unpacked and MD5 sums checked
+#> package 'readr' successfully unpacked and MD5 sums checked
+#> 
+#> The downloaded binary packages are in
+#>  C:\Users\ibaad\AppData\Local\Temp\RtmpSyx7p9\downloaded_packages
+#>       v  checking for file 'C:\Users\ibaad\AppData\Local\Temp\RtmpSyx7p9\remotes40104b4f4d80\UBC-MDS-magmavizR-377ff54/DESCRIPTION'
+#>       -  preparing 'magmavizR':
+#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+#>   Warning:     Warning: C:/Users/ibaad/AppData/Local/Temp/RtmpEdf0W3/Rbuild276c4d1f6510/magmavizR/man/histogram.Rd:16: unexpected TEXT '           'distinct', 'max', 'mean', 'median', 'min', 'missing', 'product',
+#>    ', expecting ']'
+#>       -  checking for LF line-endings in source and make files and shell scripts
+#>       -  checking for empty or unneeded directories
+#>      Omitted 'LazyData' from DESCRIPTION
+#>       -  building 'magmavizR_0.0.0.1.tar.gz'
+#>      
+#> 
 ```
 
 ## Usage
