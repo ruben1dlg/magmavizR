@@ -60,10 +60,6 @@ histogram <- function(df, x, y) {
   }
 
   # check to ensure y is in the correct format and has the supported value
-  if (!startsWith(y, "..") || !endsWith(y, "..") ) {
-    stop("Value assigned to 'y' should start with '..' and end with '..'.")
-  }
-  
   if (!is.element(y, aggregation_functions)) {
     stop(paste0("Value assigned to 'y' should be one of [",
                 paste(sapply(aggregation_functions, paste, collapse = ""), collapse = " "),
