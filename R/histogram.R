@@ -38,7 +38,7 @@ histogram <- function(df, x, y) {
   }
   
   # check to ensure x is present in the df
-  if (!as.character(ggplot2::vars({{ x }})[[1]])[2] %in% colnames(df)) {
+  if (!as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
     stop("Column assigned to 'x' is not found in dataframe.")
   }
   
