@@ -51,3 +51,11 @@ test_that('Scatterplot (basic) should use geom_point and map x to x-axis, and y 
     expect_true(0.6 == rlang::get_expr(scatter_advanced$layers[[1]]$aes_params$alpha))
     expect_true(4 == rlang::get_expr(scatter_advanced$layers[[1]]$aes_params$size))
 })
+
+# test_that to check if expected errors are being raised
+test_that('The check for inputs df, x, or y is failing as they are quoted.', {
+    expect_error(scatterplot("sample_data", year, no_of_cars), "Data assigned to 'df' must be a dataframe.")
+    expect_error(scatterplot(sample_data, "year", no_of_cars), "Column name assigned to 'x' must not be in quotes.")
+    expect_error(scatterplot(sample_data, year, "no_of_cars"), "Column name assigned to 'y' must not be in quotes.")
+})
+  
