@@ -1,9 +1,10 @@
 #' Create a histogram with the magma color scheme
 #'
 #' @param df A dataframe containing the variables for plotting
-#' @param x Column name of the variable to be plotted on the x-axis
-#' @param y The aggregation function to be plotted on the y-axis.
-#'            The input needs to be in the form of `..name..`,
+#' @param x Column name of the numeric variable to be plotted on the x-axis
+#' @param y The quoted aggregation function to be plotted on the y-axis
+#'            and to be used for the fill color.
+#'            The input needs to be in the form of `"..name.."`,
 #'            where name can be values from the following list,
 #'            with explanations in the parenthesis:
 #'            [count (number of points in bin),
@@ -15,10 +16,13 @@
 #' @export
 #'
 #' @examples
-#' histogram(mtcars, vs, count)
-#' histogram(mtcars, vs, ndensity)
+#' histogram(mtcars, vs, "..count..")
+#' histogram(mtcars, vs, "..ndensity..')
 
 histogram <- function(df, x, y) {
+  aggregation_functions = c("..count..", "..density..",
+                            "..ncount..", "..ndensity..",
+                            "..width..")
   
   # check to ensure df is assigned a dataframe
   if (!is.data.frame(df)) {
@@ -38,26 +42,39 @@ histogram <- function(df, x, y) {
     stop("Column assigned to 'x' is not found in dataframe.")
   }
   
-  # check to ensure y is not in quotes
+  # check to ensure column x is numeric 
+  if (!is.numeric(dplyr::pull(df, {{x}}))) {
+    stop("Column assigned to 'x' is not numeric.")
+  }
+  
+  # check to ensure y is in quotes
   if (
-    typeof(substitute(y)) !=
-    typeof(as.list(quote(symbol))[[1]])
+    typeof(substitute(y)) == typeof(as.list(quote(symbol))[[1]])
   ) {
-    stop("The aggregation function assigned to 'y' must not be in quotes.")
+    stop("The aggregation function assigned to 'y' must be in quotes.")
+  }
+
+  # check to ensure y is in the correct format and has the supported value
+  if (!startsWith(y, "..") || !endsWith(y, "..") ) {
+    stop("Value assigned to 'y' should start with '..' and end with '..'.")
   }
   
-  # check to ensure y is in the correct format
-  if () {
-    stop("Column assigned to 'x' is not found in dataframe.")
+  if (!is.element(y, aggregation_functions)) {
+    stop(paste0("Value assigned to 'y' should be one of [",
+                paste(sapply(aggregation_functions, paste, collapse = ""), collapse = " "),
+               "].", sep = ' '))
   }
-  
+
+  y <- rlang::sym(y)
+
   plt <- ggplot2::ggplot(df,
                          ggplot2::aes(
                            x = {{x}},
-                           y = {{y}}
+                           y = !!y,
+                           fill = {{y}}
                          )) +
     ggplot2::geom_histogram() +
-    viridis::scale_fill_viridis(option = "magma")
+    viridis::scale_fill_viridis("Legend", option = "magma")
   
   return(plt)
 }
