@@ -16,8 +16,8 @@
 #' @export
 #'
 #' @examples
-#' histogram(mtcars, vs, "..count..")
-#' histogram(mtcars, vs, "..ndensity..')
+#' histogram(mtcars, wt, "..count..")
+#' histogram(mtcars, mpg, "..ndensity..')
 
 histogram <- function(df, x, y) {
   aggregation_functions = c("..count..", "..density..",
