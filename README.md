@@ -66,25 +66,19 @@ corrplot(penguins_data, print_corr = TRUE, title = "Correlation Plot")
 
 ### Histogram
 
-Returns a histogram based on the data frame and a categorical feature to
-plot on the x-axis. The y-axis will display the result of some of the
-following aggregating functions:
+Returns a histogram based on the data frame and a numeric feature to
+plot on the x-axis. The y-axis will display the result of the following
+aggregating functions:
 
--   Average
+-   count
 
--   Count
+-   ncount
 
--   Distinct
+-   density
 
--   Max
+-   ndensity
 
--   Min
-
--   Median
-
--   Mean
-
--   Among others (listed in documentation for the function).
+-   width
 
 ``` r
 histogram(penguins_data, bill_length_mm, "..count..")
