@@ -9,9 +9,9 @@ boxplot(df, x, y, facet = FALSE)
 \arguments{
 \item{df}{Dataframe containing the variables for plotting}
 
-\item{x}{Column name of the numerical variable to view the distribution of}
+\item{x}{Column name of the categorical variable to view the distribution of}
 
-\item{y}{Column name containing the categorical variables to assign boxes to}
+\item{y}{Column name containing the numerical variables to assign boxes to}
 
 \item{facet}{Determines whether separate graphs will be created for each category}
 }
@@ -22,5 +22,7 @@ a ggplot object
 Plot a boxplot with the magma color scheme and an option to facet.
 }
 \examples{
-function(df, Length, Species, TRUE)
+df <- iris
+boxplot(df, Species, Sepal.Length, facet = TRUE)
+
 }
