@@ -8,24 +8,24 @@ scatterplot(
   df,
   x,
   y,
-  c = "",
+  c = NULL,
   t = "",
   o = 0.5,
-  s = 50,
+  s = 3,
   xtitle = "",
   ytitle = "",
   ctitle = "",
-  xzero = False,
-  yzero = False,
-  shapes = True
+  xzero = FALSE,
+  yzero = FALSE,
+  shapes = FALSE
 )
 }
 \arguments{
 \item{df}{A dataframe to use for the scatterplot.}
 
-\item{x}{Column-name of the numerical variable to be plotted on the x-axis}
+\item{x}{Column-name of the numerical or categorical variable to be plotted on the x-axis}
 
-\item{y}{Column-name of the numerical variable to be plotted on the y-axis}
+\item{y}{Column-name of the numerical or categorical variable to be plotted on the y-axis}
 
 \item{c}{Column-name of the categorical variable to color-code the data points
 Default value is blank for cases when there is no categorical column}
@@ -33,9 +33,9 @@ Default value is blank for cases when there is no categorical column}
 \item{t}{Title of the plot. Default value is blank.
 If not provided, title will be computed based on x, y and/or c}
 
-\item{o}{Opacity of the data points}
+\item{o}{Opacity of the data points. Number between 0.1 and 1.0 (inclusive)}
 
-\item{s}{Size of the data points}
+\item{s}{Size of the data points. Number between 1 and 5 (inclusive)}
 
 \item{xtitle}{Title of the x-axis. Default value is blank.
 If not provided, title will be proper case of the x axis column}
@@ -46,14 +46,14 @@ If not provided, title will be proper case of the y axis column}
 \item{ctitle}{Title of the x-axis. Default value is blank.
 If not provided, title will be proper case of the color column}
 
-\item{xzero}{Scale the x-axis to start from 0 by specifying True
-Default value is set to False}
+\item{xzero}{Scale the x-axis to start from 0 by specifying TRUE
+Default value is set to FALSE}
 
-\item{yzero}{Scale the x-axis to start from 0 by specifying True
-Default value is set to False}
+\item{yzero}{Scale the x-axis to start from 0 by specifying TRUE
+Default value is set to FALSE}
 
-\item{shapes}{Assign the color column to the shape attribute of the plot if True
-Default value is set to True}
+\item{shapes}{Assign the color column to the shape attribute of the plot if TRUE
+Default value is set to FALSE}
 }
 \value{
 A ggplot object.
@@ -62,7 +62,8 @@ A ggplot object.
 Create a scatterplot using the magma color scheme
 }
 \examples{
->>> scatterplot(iris, sepalLength, sepalWidth, species,
-                "Iris Sepal Length vs Sepal Width across Species",
-                1.0, 50, "Sepal Length", "Sepal Width", "", False, False, True)
+penguins_data <- palmerpenguins::penguins
+scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species,
+              "Bill and Flipper length clusters by Species",
+              0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
 }

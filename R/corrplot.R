@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' corrplot(df, print_corr = FALSE, title = "Correlation chart")
+#' corrplot(iris, print_corr = FALSE, title = "Correlation chart")
 #library(ggplot2)
 corrplot <- function(df, print_corr=FALSE, title="Correlation Plot") {
     # Checking if df is a dataframe

@@ -10,15 +10,15 @@
 #' @export
 #'
 #' @examples
-#' boxplot(df, Length, Species, facet = TRUE)
+#' boxplot(iris, Species, Sepal.Length, facet = TRUE)
 #'
 boxplot <- function(df, x, y, facet = FALSE){
 
-library(viridis)
-library(stringr)
-library(rlang)
-library(ggplot2)
-library(dplyr)
+#library(viridis)
+#library(stringr)
+#library(rlang)
+#library(ggplot2)
+#library(dplyr)
 
 ### input tests
 #check type of x
