@@ -1,8 +1,8 @@
-library(tidyverse)
-library(ggplot2)
-library(viridis)
-library(stringr)
-library(rlang)
+#library(tidyverse)
+#library(ggplot2)
+#library(viridis)
+#library(stringr)
+#library(rlang)
 
 #' Create a scatterplot using the magma color scheme
 #'
@@ -32,8 +32,8 @@ library(rlang)
 #' @export
 #'
 #' @examples
-#' > penguins_data <- palmerpenguins::penguins
-#' > scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species,
+#' penguins_data <- palmerpenguins::penguins
+#' scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species,
 #'               "Bill and Flipper length clusters by Species",
 #'               0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
 
@@ -63,12 +63,12 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
     }
 
     # check if column x is present in the df
-    if (!as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
+    if (!rlang::as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
         stop("Column assigned to 'x' not found in dataframe.")
     }
 
     # check if column y is present in the df
-    if (!as_name(ggplot2::vars({{ y }})[[1]]) %in% colnames(df)) {
+    if (!rlang::as_name(ggplot2::vars({{ y }})[[1]]) %in% colnames(df)) {
         stop("Column assigned to 'y' not found in dataframe.")
     }
 
@@ -83,13 +83,13 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
         }
 
         # check if column c is present in the df
-        if (!as_name(ggplot2::vars({{ c }})[[1]]) %in% colnames(df)) {
+        if (!rlang::as_name(ggplot2::vars({{ c }})[[1]]) %in% colnames(df)) {
             stop("Column assigned to 'color' not found in dataframe.")
         }
 
         # check if column assigned to c is either of type character or factor
-        if (!class(df[[as_name(ggplot2::vars({{ c }})[[1]])]]) == "character" &
-            !class(df[[as_name(ggplot2::vars({{ c }})[[1]])]]) == "factor") {
+        if (!class(df[[rlang::as_name(ggplot2::vars({{ c }})[[1]])]]) == "character" &
+            !class(df[[rlang::as_name(ggplot2::vars({{ c }})[[1]])]]) == "factor") {
             stop("Column assigned to 'color' must be of type 'character' or 'factor'.")
         }
     }
@@ -126,18 +126,18 @@ scatterplot <- function(df, x, y, c=NULL, t="", o=0.5, s=3, xtitle="", ytitle=""
 
     # renaming x axis if custom x axis title not assigned
     if (xtitle == "") {
-        xtitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ x }})[[1]]), "[_!.]", " "))
+        xtitle <- stringr::str_to_sentence(stringr::str_replace_all(rlang::as_name(ggplot2::vars({{ x }})[[1]]), "[_!.]", " "))
     }
 
     # renaming y axis if custom x axis title not assigned
     if (ytitle == "") {
-        ytitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ y }})[[1]]), "[_!.]", " "))
+        ytitle <- stringr::str_to_sentence(stringr::str_replace_all(rlang::as_name(ggplot2::vars({{ y }})[[1]]), "[_!.]", " "))
     }
 
     # renaming x axis if custom x axis title not assigned
     if (ctitle == "") {
         if (!is.null(substitute(c)) == TRUE) {
-            ctitle <- stringr::str_to_sentence(stringr::str_replace_all(as_name(ggplot2::vars({{ c }})[[1]]), "[_!.]", " "))
+            ctitle <- stringr::str_to_sentence(stringr::str_replace_all(rlang::as_name(ggplot2::vars({{ c }})[[1]]), "[_!.]", " "))
         }
     }
 

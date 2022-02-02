@@ -4,41 +4,41 @@
 #' @param x Column name of the numeric variable to be plotted on the x-axis
 #' @param y The quoted aggregation function to be plotted on the y-axis
 #'            and to be used for the fill color.
-#'            The input needs to be in the form of `"..name.."`,
+#'            The input needs to be in the form of "..name..",
 #'            where name can be values from the following list,
 #'            with explanations in the parenthesis:
-#'            [count (number of points in bin),
+#'             {count (number of points in bin),
 #'             density (density of points in bin, scaled to integrate to 1),
 #'             ncount (count, scaled to maximum of 1),
 #'             ndensity (density, scaled to maximum of 1),
-#'             width (widths of bins)]
+#'             width (widths of bins)}
 #' @return A ggplot object.
 #' @export
 #'
 #' @examples
 #' histogram(mtcars, wt, "..count..")
 #' histogram(mtcars, mpg, "..ndensity..')
-
-library(ggplot2)
-library(dplyr)
-library(rlang)
-library(viridis)
-
-library(ggplot2)
-library(dplyr)
-library(rlang)
-library(viridis)
-
 histogram <- function(df, x, y) {
+
+#library(ggplot2)
+#library(dplyr)
+#library(rlang)
+#library(viridis)
+
+#library(ggplot2)
+#library(dplyr)
+#library(rlang)
+#library(viridis)
+
   aggregation_functions = c("..count..", "..density..",
                             "..ncount..", "..ndensity..",
                             "..width..")
-  
+
   # check to ensure df is assigned a dataframe
   if (!is.data.frame(df)) {
     stop("Data assigned to 'df' must be a dataframe.")
   }
-  
+
   # check to ensure x is not in quotes
   if (
     typeof(substitute(x)) !=
@@ -46,17 +46,17 @@ histogram <- function(df, x, y) {
   ) {
     stop("Column name assigned to 'x' must not be in quotes.")
   }
-  
+
   # check to ensure x is present in the df
-  if (!as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
+  if (!rlang::as_name(ggplot2::vars({{ x }})[[1]]) %in% colnames(df)) {
     stop("Column assigned to 'x' is not found in dataframe.")
   }
-  
-  # check to ensure column x is numeric 
+
+  # check to ensure column x is numeric
   if (!is.numeric(dplyr::pull(df, {{x}}))) {
     stop("Column assigned to 'x' is not numeric.")
   }
-  
+
   # check to ensure y is in quotes
   if (
     typeof(substitute(y)) == typeof(as.list(quote(symbol))[[1]])
@@ -81,7 +81,7 @@ histogram <- function(df, x, y) {
                          )) +
     ggplot2::geom_histogram() +
     viridis::scale_fill_viridis("Legend", option = "magma")
-  
+
   return(plt)
 }
 

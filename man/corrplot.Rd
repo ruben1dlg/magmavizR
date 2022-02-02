@@ -22,5 +22,5 @@ Generates a correlation plot for the numeric variables in a dataframe,
 and prints the correlation values.
 }
 \examples{
-corrplot(df, print_corr = FALSE, title = "Correlation chart")
+corrplot(iris, print_corr = FALSE, title = "Correlation chart")
 }
