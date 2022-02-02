@@ -3,9 +3,9 @@ Title: magmavizR is a plotting package
 Version: 0.0.0.1
 Authors@R: 
     c(person(given = "Ruben", family = "De la Garza", role = c("aut", "cre"), email="ruben1dlg@gmail.com"),
-    person(given = "Irene", family = "Yan", email="ruben1dlg@gmail.com"),
-    person(given = "Mukund", family = "Iyer", email="ruben1dlg@gmail.com"),
-    person(given = "Adbul Moid", family = "Mohammed", email="ruben1dlg@gmail.com"))           
+    person(given = "Irene", family = "Yan", email="ruben1dlg@gmail.com", role = c("col")),
+    person(given = "Mukund", family = "Iyer", email="ruben1dlg@gmail.com", role = c("col")),
+    person(given = "Adbul Moid", family = "Mohammed", email="ruben1dlg@gmail.com", role = c("col")))           
 Description: This is a plotting package that has a purpleorange color theme.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -13,7 +13,6 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -23,6 +22,6 @@ Imports:
     viridis,
     stringr,
     rlang,
-    knitr
-Depends: 
-    tidyverse
+    knitr,
+    dplyr
+

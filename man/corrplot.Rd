@@ -22,5 +22,6 @@ Generates a correlation plot for the numeric variables in a dataframe,
 and prints the correlation values.
 }
 \examples{
-corrplot(df, print_corr = FALSE, title = "Correlation chart")
+penguins_data <- palmerpenguins::penguins
+corrplot(penguins_data, print_corr = FALSE, title = "Correlation chart")
 }

@@ -10,15 +10,10 @@
 #' @export
 #'
 #' @examples
-#' boxplot(df, Length, Species, facet = TRUE)
+#' penguins_data <- palmerpenguins::penguins
+#' boxplot(penguins_data, species, flipper_length_mm, facet = TRUE)
 #'
 boxplot <- function(df, x, y, facet = FALSE){
-
-library(viridis)
-library(stringr)
-library(rlang)
-library(ggplot2)
-library(dplyr)
 
 ### input tests
 #check type of x

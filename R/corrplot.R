@@ -9,8 +9,9 @@
 #' @export
 #'
 #' @examples
-#' corrplot(df, print_corr = FALSE, title = "Correlation chart")
-#library(ggplot2)
+#' penguins_data <- palmerpenguins::penguins
+#' corrplot(penguins_data, print_corr = FALSE, title = "Correlation chart")
+
 corrplot <- function(df, print_corr=FALSE, title="Correlation Plot") {
     # Checking if df is a dataframe
     if (!is.data.frame(df)) {
