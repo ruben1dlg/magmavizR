@@ -23,6 +23,8 @@
 #' histogram(penguins, flipper_length_mm, "..count..")
 
 histogram <- function(df, x, y) {
+
+
   aggregation_functions = c("..count..", "..density..",
                             "..ncount..", "..ndensity..",
                             "..width..")
