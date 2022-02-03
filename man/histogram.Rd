@@ -13,18 +13,23 @@ histogram(df, x, y)
 
 \item{y}{The quoted aggregation function to be plotted on the y-axis
 and to be used for the fill color.
-The input needs to be in the form of "..name..",
+The input needs to be in the form of ..name..,
 where name can be values from the following list,
 with explanations in the parenthesis:
-{count (number of points in bin),
+count (number of points in bin),
 density (density of points in bin, scaled to integrate to 1),
 ncount (count, scaled to maximum of 1),
 ndensity (density, scaled to maximum of 1),
-width (widths of bins)}}
+width (widths of bins)}
 }
 \value{
 A ggplot object.
 }
 \description{
 Create a histogram with the magma color scheme
+}
+\examples{
+library(palmerpenguins)
+penguins_data <- penguins
+histogram(penguins, flipper_length_mm, "..count..")
 }

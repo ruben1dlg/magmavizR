@@ -1,8 +1,7 @@
-#library(tidyverse)
-#library(ggplot2)
-#library(viridis)
-#library(stringr)
-#library(rlang)
+library(ggplot2)
+library(viridis)
+library(stringr)
+library(rlang)
 
 #' Create a scatterplot using the magma color scheme
 #'

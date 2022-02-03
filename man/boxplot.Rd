@@ -22,6 +22,7 @@ a ggplot object
 Plot a boxplot with the magma color scheme and an option to facet.
 }
 \examples{
-boxplot(iris, Species, Sepal.Length, facet = TRUE)
+penguins_data <- palmerpenguins::penguins
+boxplot(penguins_data, species, flipper_length_mm, facet = TRUE)
 
 }
