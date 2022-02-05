@@ -7,6 +7,8 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/UBC-MDS/magmavizR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/magmavizR?branch=master)
+[![R-CMD-check](https://github.com/UBC-MDS/magmavizR/actions/workflows/check-standard.yaml/badge.svg?branch=master)](https://github.com/UBC-MDS/magmavizR/actions/workflows/check-standard.yaml)
+[![pages-build-deployment](https://github.com/UBC-MDS/magmavizR/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/UBC-MDS/magmavizR/actions/workflows/pages/pages-build-deployment)
 
 <!-- badges: end -->
 
@@ -115,14 +117,11 @@ level implementation of it. Essentially it circumvents the need to code
 every single detail and allows the user to focus on the output. We came
 across two packages on CRAN that have a similar line of thought:
 
--   \[quickplot\]
-    <https://cran.r-project.org/web/packages/quickPlot/index.html> -
+-   [quickplot](https://cran.r-project.org/web/packages/quickPlot/index.html) -
     also a high level package based on ggplot that generates plots
     modularly.
 
--   \[BoutrosLab.plotting.general\]
-    (<https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/index.html>) -
-    same motivation as this package, plots on a high level with a
+-   [BoutrosLab.plotting.general](https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/index.html) - same motivation as this package, plots on a high level with a
     standard format. It does not use ggplot however.
 
 ## Contributing
