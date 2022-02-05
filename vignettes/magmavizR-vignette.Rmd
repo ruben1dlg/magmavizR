@@ -1,0 +1,70 @@
+---
+title: "magmavizR-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{magmavizR-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Usage
+
+The magmavizR library can be loaded by using the commands below:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library("magmavizR")
+penguins_data <- palmerpenguins::penguins
+penguins_data
+```
+
+The four data visualization functions included in the package along with the usage are outlined below:
+
+### Boxplot
+
+Returns a boxplot based on the data frame, a numerical feature to view the distribution of and a categorical feature to bucket data into categories. Additionally, there is a boolean option to facet the boxplots into separate charts.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+boxplot(penguins_data, species, bill_length_mm, facet = TRUE)
+```
+
+### Correlation plot
+
+Returns a correlation plot based on the numerical features present in the data frame. Additionally, it will print the correlated numerical feature pairs along with their correlation values.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+corrplot(penguins_data, print_corr = TRUE, title = "Correlation")
+```
+
+### Histogram
+
+Returns a histogram based on the data frame and a numeric feature to plot on the x-axis. The y-axis will display the result of the following aggregating functions:
+
+-   count
+
+-   ncount
+
+-   density
+
+-   ndensity
+
+-   width
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+histogram(penguins_data, bill_length_mm, "..count..")
+```
+
+### Scatterplot
+
+Returns a scatterplot based on the data frame and two numerical feature names passed as the required inputs. There are auxiliary inputs that provide the flexibility to:
+
+-   Color code or change the shape of the data points on a categorical variable
+
+-   Set a title to the plot, x-axis, y-axis and color legend
+
+-   Change the opacity and size of the data points
+
+-   Set the scale of the x-axis and y-axis to start from zero
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species, "Bill and Flipper length clusters by Species", 0.5, 2.5, "Bill length (mm)", "Flipper length (mm)", "", FALSE, FALSE, TRUE)
+```
