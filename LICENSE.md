@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2022 magmavizR authors
+Copyright (c) 2022 Moid Mohammed, Ruben De la Garcia, Irene Yan, Mukund Iyer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
