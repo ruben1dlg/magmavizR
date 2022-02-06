@@ -13,8 +13,8 @@ coverage](https://codecov.io/gh/UBC-MDS/magmavizR/branch/master/graph/badge.svg)
 <!-- badges: end -->
 
 Exploratory Data Analysis is one of the key steps in a machine learning
-project. This package aims to make this process easy by providing python
-functions based on the ‘Altair’ package to plot four common types of
+project. This package aims to make this process easy by providing R
+functions built on the `ggplot2` package to plot four common types of
 plots with the magma color scheme. To maximize interpretability, the
 plots have defined color schemes (discrete, diverging, sequential) based
 on the kind of data they show.
@@ -28,6 +28,10 @@ The development version of the package can be installed from
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/magmavizR")
 ```
+
+## Documentation 
+
+An interactive version of the documentation can be found [here](https://ubc-mds.github.io/magmavizR/).
 
 ## Usage
 
@@ -111,18 +115,18 @@ scatterplot(penguins_data, bill_length_mm, flipper_length_mm, species, "Bill and
 
 ### Fit within R ecosystem
 
-Our package will build onto the existing features of ‘ggplot’ using the
+Our package will build onto the existing features of `ggplot2` using the
 magma color scheme. It serves as an automated plotter and is a higher
 level implementation of it. Essentially it circumvents the need to code
 every single detail and allows the user to focus on the output. We came
 across two packages on CRAN that have a similar line of thought:
 
 -   [quickplot](https://cran.r-project.org/web/packages/quickPlot/index.html) -
-    also a high level package based on ggplot that generates plots
+    also a high level package based on `ggplot2` that generates plots
     modularly.
 
 -   [BoutrosLab.plotting.general](https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/index.html) - same motivation as this package, plots on a high level with a
-    standard format. It does not use ggplot however.
+    standard format. It does not use `ggplot2` however.
 
 ## Contributing
 
