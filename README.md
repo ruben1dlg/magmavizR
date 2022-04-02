@@ -146,7 +146,7 @@ agree to abide by its terms.
 
 `magmavizR` was created by Abdul Moid Mohammed, Mukund Iyer, Irene Yan,
 Rubén De la Garza Macías. It is licensed under the terms of the MIT
-license.
+license
 
 ## Credits
 
